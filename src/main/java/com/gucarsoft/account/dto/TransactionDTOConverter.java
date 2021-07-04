@@ -8,7 +8,7 @@ public class TransactionDTOConverter {
 
     public TransactionDTO convert(Transaction from){
         return new TransactionDTO(from.getId(),
-                from.getTransaction(),
+                from.getTransactionType(),
                 from.getAmount(),
                 from.getTransactionDate());
     }
