@@ -20,9 +20,10 @@ public class CustomerService {
 
     protected Customer findCustomerById(String id) {
         return customerRepository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("Customer could not find by id: " + id));
-    }
+                .orElseThrow(
+                        () -> new CustomerNotFoundException("Customer could not find by id: " + id));
 
+    }
     public CustomerDTO getCustomerById(String customerID) {
         return converter.convertToCustomerDTO(findCustomerById(customerID));
     }

@@ -17,16 +17,13 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final CustomerService customerService;
-   // private final TransactionService transactionService;
     private final AccountDTOConverter converter;
 
     public AccountService(AccountRepository accountRepository,
                           CustomerService customerService,
-                         // TransactionService transactionService,
                           AccountDTOConverter converter) {
         this.accountRepository = accountRepository;
         this.customerService = customerService;
-       // this.transactionService = transactionService;
         this.converter = converter;
     }
 

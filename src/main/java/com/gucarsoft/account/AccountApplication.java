@@ -23,8 +23,6 @@ public class AccountApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-		/*Account a= new Account("a", BigDecimal.ONE, LocalDateTime.now(),null, SetsKt.emptySet());
-		Account b= new Account("a", BigDecimal.ONE, LocalDateTime.now(),null, SetsKt.emptySet());*/
        Customer customer = customerRepository.save(new Customer("", "mehmet", "ahmet", new HashSet<>()));
         System.out.println(customer.getId());
     }

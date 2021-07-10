@@ -3,20 +3,20 @@ package com.gucarsoft.account.dto;
 import com.gucarsoft.account.model.Customer;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
 public class CustomerDTOConverter {
 
-    private final CustomerAccountDTOConverter converter;
+    private final CustomerAccountDTOConverter customerAccountDTOConverter;
 
     public CustomerDTOConverter(CustomerAccountDTOConverter converter) {
-        this.converter = converter;
+        this.customerAccountDTOConverter = converter;
     }
 
-    public AccountCustomerDTO convertToAccountCustomer(Customer from) {
-        return from == null ? new AccountCustomerDTO("", "", "")
-                : new AccountCustomerDTO(from.getId(), from.getName(), from.getSurname());
+    public AccountCustomerDTO convertToAccountCustomer(Optional<Customer> from) {
+        return from.map(f -> new AccountCustomerDTO(f.getId(), f.getName(), f.getSurname())).orElse(null);
     }
 
     public CustomerDTO convertToCustomerDTO(Customer from) {
@@ -24,7 +24,12 @@ public class CustomerDTOConverter {
                 from.getId(),
                 from.getName(),
                 from.getSurname(),
-                from.getAccounts().stream().map(converter::convert).collect(Collectors.toSet()));
+                from.getAccounts()
+                        .stream()
+                        .map(customerAccountDTOConverter::convert)
+                        .collect(Collectors.toSet()));
+
     }
-    
+
+
 }

@@ -3,6 +3,7 @@ package com.gucarsoft.account.dto;
 import com.gucarsoft.account.model.Account;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -20,7 +21,7 @@ public class AccountDTOConverter {
         return new AccountDTO(from.getId(),
                 from.getBalance(),
                 from.getCreationDate(),
-                customerDTOConverter.convertToAccountCustomer(from.getCustomer()),
+                customerDTOConverter.convertToAccountCustomer(Optional.ofNullable(from.getCustomer())),
                 from.getTransaction()
                         .stream()
                         .map(transactionDTOConverter::convert)
